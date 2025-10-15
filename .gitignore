@@ -1,0 +1,14 @@
+# Ignorar o ambiente virtual
+.venv/
+
+# Cache do Python
+__pycache__/
+
+# Arquivos temporários do VS Code
+.vscode/
+
+# Outros comuns
+*.pyc
+*.pyo
+
+bbc-fulltext
