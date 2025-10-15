@@ -23,7 +23,7 @@ class Indexador:
             if not os.path.isdir(caminho_categoria):
                 continue
 
-            for arquivo in os.listdir(caminho_categoria):
+            for arquivo in sorted(os.listdir(caminho_categoria), key=lambda x: int(x.split('.')[0])):
                 caminho_arquivo = os.path.join(caminho_categoria, arquivo)
 
                 if not arquivo.endswith(".txt"):
