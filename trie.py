@@ -2,9 +2,11 @@
 
 class TrieNode:
     def __init__(self):
-        self.children = {}   # {string: TrieNode}
-        self.docs = set()    # conjunto de IDs de documentos
-        self.is_end = False
+        self.children = {}      # {string_da_aresta: TrieNode}
+        self.postings = []      # Estrutura: [(doc_id, frequencia), (doc_id, frequencia), ...]
+        self.is_end = False     # Flag para indicar se o caminho até aqui forma um termo completo
+
+
 
 
 
@@ -13,9 +15,7 @@ class TrieCompacta:
             self.root = TrieNode()
 
     def insert(self, word: str, doc_id: int):
-        """
-        Insere uma palavra associando-a a um documento.
-        """
+        # Insere uma palavra associando-a a um documento.
         node = self.root
         current = word
 
@@ -108,6 +108,16 @@ class TrieCompacta:
             word = prefix + edge
             print(f"{word}  (end={child.is_end}, docs={child.docs})")
             self.print_trie(child, word)
+
+        
+    def get_all_words_with_postings(self) -> dict:
+        """
+        Retorna um dicionário de todos os termos na Trie com suas listas de postagem.
+        Útil para calcular estatísticas globais.
+        """
+        words = {}
+        self._get_all_words_recursive(self.root, "", words)
+        return words
 
 
 
