@@ -27,7 +27,11 @@ class RecuperacaoInformacao:
 
         arvore = self._construir_arvore(tokens)
         resultado = self._avaliar_arvore(arvore)
+
+
         return resultado
+
+
 
     
     def _construir_arvore(self, tokens):
@@ -40,13 +44,20 @@ class RecuperacaoInformacao:
 
         def aplicar_operador():
             
+            if not operadores:
+                raise ValueError("Erro, faltou operador")
+            op = operadores.pop()
             if len(valores) < 2 or not operadores:
                 return
-            op = operadores.pop()
+            
             direita = valores.pop()
             esquerda = valores.pop()
             valores.append(NoConsulta(op, esquerda, direita))
 
+        if tokens[0] in ("AND", "OR") or tokens[-1] in ("AND", "OR"):
+            print("Pesquisa inválida")
+            return None
+        
         for token in tokens:
             if token == '(':
                 operadores.append(token)
@@ -89,7 +100,14 @@ class RecuperacaoInformacao:
         else:  # "OR"
             return esquerda | direita
 
-    
+    def contar_nos(self, no):
+
+        if no is None:
+            return 0
+        return 1 + self.contar_nos(no.esquerda) + self.contar_nos(no.direita)
+
+
+
     def mostrar_resultados(self, consulta: str):
 
         resultados = self.processar_consulta(consulta)
