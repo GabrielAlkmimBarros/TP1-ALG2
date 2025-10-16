@@ -3,7 +3,7 @@
 class TrieNode:
     def __init__(self):
         self.children = {}      # {string_da_aresta: TrieNode}
-        self.postings = []      # Estrutura: [(doc_id, frequencia), (doc_id, frequencia), ...]
+        self.postings = {}      # Estrutura: [(doc_id, frequencia), (doc_id, frequencia), ...]
         self.is_end = False     # Flag para indicar se o caminho até aqui forma um termo completo
 
 
@@ -43,14 +43,14 @@ class TrieCompacta:
                 # Caso 3: não há prefixo comum -> adiciona nova aresta
                 new_node = TrieNode()
                 new_node.is_end = True
-                new_node.docs.add(doc_id)
+                new_node.postings[doc_id] = 1
                 node.children[current] = new_node
                 return
 
             # Se já consumimos toda a palavra, marca fim de palavra
             if current == "":
                 node.is_end = True
-                node.docs.add(doc_id)
+                node.postings[doc_id] = node.postings.get(doc_id, 0) + 1
                 return
 
     def search(self, word: str):
@@ -67,12 +67,11 @@ class TrieCompacta:
                     found = True
                     break
                 elif edge.startswith(current):  # palavra termina no meio da aresta
-                    return set()
+                    return {}
             if not found:
-                return set()  # não encontrou prefixo compatível
+                return {}  # não encontrou prefixo compatível
 
-
-        return node.docs if node.is_end else set()
+        return set(node.postings.keys()) if node.is_end else set()
     
     def _common_prefix_length(self, a: str, b: str) -> int:
 
@@ -111,14 +110,10 @@ class TrieCompacta:
 
         
     def get_all_words_with_postings(self) -> dict:
-        """
-        Retorna um dicionário de todos os termos na Trie com suas listas de postagem.
-        Útil para calcular estatísticas globais.
-        """
+
         words = {}
         self._get_all_words_recursive(self.root, "", words)
         return words
-
 
 
 
