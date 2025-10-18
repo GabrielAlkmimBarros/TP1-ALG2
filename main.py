@@ -1,10 +1,13 @@
+import os  # <-- PASSO 1: Adicione esta importação
 from indexador import Indexador
 from searchTree import RecuperacaoInformacao 
+
 
 
 def main():
     caminho_corpus = "bbc-fulltext/bbc"   
     arquivo_indice = "indice.txt"
+
 
 
     indexador = Indexador(caminho_corpus, arquivo_indice)
@@ -24,6 +27,7 @@ def main():
 
         if not consulta:
             continue
+
 
         try:
             busca.mostrar_resultados(consulta)
