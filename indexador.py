@@ -24,9 +24,7 @@ class Indexador:
 
 
     def construir_indice(self):
-        """
-        Percorre todas as pastas e arquivos do corpus, indexando termos na Trie.
-        """
+
         for categoria in os.listdir(self.caminho_corpus):
             caminho_categoria = os.path.join(self.caminho_corpus, categoria)
             if not os.path.isdir(caminho_categoria):
