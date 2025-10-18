@@ -2,9 +2,9 @@
 
 class TrieNode:
     def __init__(self):
-        self.children = {}   # {string: TrieNode}
-        self.docs = set()    # conjunto de IDs de documentos
-        self.is_end = False
+        # self.children = {}   # {string: TrieNode}
+        # self.docs = set()    # conjunto de IDs de documentos
+        # self.is_end = False
         self.children = {}      # {string_da_aresta: TrieNode}
         self.postings = {}      # Estrutura: [(doc_id, frequencia), (doc_id, frequencia), ...]
         self.is_end = False     # Flag para indicar se o caminho até aqui forma um termo completo
@@ -114,11 +114,16 @@ class TrieCompacta:
             self.print_trie(child, word)
 
         
+
     def get_all_words_with_postings(self) -> dict:
-
         words = {}
-        self._get_all_words_recursive(self.root, "", words)
+
+        def percorrer(node, prefixo):
+            for edge, child in node.children.items():
+                nova_palavra = prefixo + edge
+                if child.is_end:
+                    words[nova_palavra] = child.postings
+                percorrer(child, nova_palavra)
+
+        percorrer(self.root, "")
         return words
-
-
-

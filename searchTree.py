@@ -47,7 +47,7 @@ class RecuperacaoInformacao:
             if not operadores:
                 raise ValueError("Erro, faltou operador")
             op = operadores.pop()
-            if len(valores) < 2 or not operadores:
+            if len(valores) < 2 :
                 return
             
             direita = valores.pop()
