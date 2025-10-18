@@ -1,0 +1,15 @@
+bbc-fulltext/
+bbc-fulltext/*.tmp
+bbc-fulltext/*.log
+bbc-fulltext/cache/
+bbc-fulltext/output/
+bbc-fulltext/temp/
+bbc-fulltext/*.bak
+bbc-fulltext/*.aux
+bbc-fulltext/*.out
+bbc-fulltext/*.toc
+bbc-fulltext/*.gz
+bbc-fulltext/*.zip
+bbc-fulltext/*.rar
+bbc-fulltext/*.7z
+bbc-fulltext/*.exe

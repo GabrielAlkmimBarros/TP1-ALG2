@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados para {{ query }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .search-header { border-bottom: 1px solid #ebebeb; padding-bottom: 15px; }
+        .search-bar { width: 400px; padding: 10px; border-radius: 20px; border: 1px solid #dfe1e5; }
+        .search-button { padding: 10px 15px; }
+        .result-item { margin-top: 20px; }
+        .result-title { color: #1a0dab; font-size: 20px; text-decoration: none; }
+        .result-snippet { color: #4d5156; }
+    </style>
+</head>
+<body>
+
+    <div class="search-header">
+        <form action="/buscar" method="POST">
+            <input type="text" name="query" class="search-bar" value="{{ query }}">
+            <button type="submit" class="search-button">Pesquisar</button>
+        </form>
+    </div>
+
+    <p>Exibindo resultados para: <strong>{{ query }}</strong></p>
+
+    <div class="results-container">
+        {% for resultado in resultados %}
+            <div class="result-item">
+                <a href="{{ resultado.link }}" class="result-title">{{ resultado.titulo }}</a>
+                <p class="result-snippet">{{ resultado.snippet }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>
