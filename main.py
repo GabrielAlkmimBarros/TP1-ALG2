@@ -1,34 +1,35 @@
 from indexador import Indexador
 from searchTree import RecuperacaoInformacao 
 
-if __name__ == "__main__":
-    corpus_path = "bbc-fulltext/bbc"
-    
 
-    indexador = Indexador(corpus_path)
-    print("\nConstruindo índice...")
-    indexador.construir_indice()
+def main():
+    caminho_corpus = "bbc-fulltext/bbc"   
+    arquivo_indice = "indice.txt"
 
-    # Cria o módulo de busca 
+
+    indexador = Indexador(caminho_corpus, arquivo_indice)
+
+ 
     busca = RecuperacaoInformacao(indexador)
 
-    # Loop interativo
+    print("\nÍndice pronto para consultas booleanas!")
+
     while True:
-        consulta = input("\nDigite sua consulta (ou 'sair'): ")
+        consulta = input("Consulta: ").strip()
         if consulta.lower() == "sair":
+            print("\nSalvando índice e encerrando...")
+            indexador.salvar_indice()
+            print("Índice salvo. Até mais!")
             break
 
-        # Avalia a consulta usando a árvore 
-        docs = busca.processar_consulta(consulta)
+        if not consulta:
+            continue
 
-        if not docs:
-            print("Nenhum documento encontrado.")
-        else:
-            # Converte IDs em caminhos de arquivo
-            caminhos = [indexador.mapa_docs[i] for i in docs]
-            caminhos = sorted(caminhos, key=lambda x: int(x.split('/')[-1].split('.')[0]))
+        try:
+            busca.mostrar_resultados(consulta)
+        except Exception as e:
+            print(f"\nErro ao processar consulta: {e}\n")
 
-            print(f"\nConsulta: {consulta}")
-            print(f"Documentos encontrados ({len(caminhos)}):")
-            for caminho in caminhos:
-                print(" -", caminho)
+
+if __name__ == "__main__":
+    main()
