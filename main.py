@@ -3,13 +3,13 @@ from searchTree import RecuperacaoInformacao
 
 
 def main():
-    caminho_corpus = "bbc-fulltext/bbc"   # ajuste para o seu diretório real
+    caminho_corpus = "bbc-fulltext/bbc"   
     arquivo_indice = "indice.txt"
 
-    # Cria ou carrega o índice
+
     indexador = Indexador(caminho_corpus, arquivo_indice)
 
-    # Inicializa o módulo de recuperação
+ 
     busca = RecuperacaoInformacao(indexador)
 
     print("\nÍndice pronto para consultas booleanas!")

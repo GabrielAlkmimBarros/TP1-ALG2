@@ -19,9 +19,7 @@ class RecuperacaoInformacao:
 
     
     def processar_consulta(self, consulta: str):
-        """
-        Constrói a árvore de consulta e avalia o resultado.
-        """
+
         tokens = re.findall(r'\(|\)|AND|OR|[A-Za-zÀ-ÿ0-9_-]+', consulta)
         tokens = [t.strip() for t in tokens if t.strip()]
 

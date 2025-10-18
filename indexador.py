@@ -48,13 +48,11 @@ class Indexador:
 
 
     def _processar_documento(self, caminho_arquivo, doc_id):
-        """
-        Lê o conteúdo do arquivo, normaliza o texto e insere termos na Trie.
-        """
+
         with open(caminho_arquivo, "r", encoding="utf-8") as f:
             texto = f.read()
 
-        # Normaliza: letras minúsculas, remove pontuação, divide em palavras
+
         palavras = re.findall(r"\b[a-zA-Záéíóúãõç]+\b", texto.lower())
 
         for termo in palavras:
@@ -62,30 +60,18 @@ class Indexador:
 
 
     def buscar(self, termo: str):
-        """
-        Retorna o conjunto de IDs de documentos em que o termo aparece.
-        """
+
         termo = termo.lower()
         return self.trie.search(termo)
 
 
     def mostrar_docs(self, ids):
-        """
-        Mostra os caminhos dos documentos a partir de seus IDs.
-        """
+
         return [self.mapa_docs[i] for i in ids if i in self.mapa_docs]
 
 
     def salvar_indice(self, caminho_arquivo: str = None):
-        """
-        Salva o índice (mapa de documentos + postings da Trie) em arquivo texto.
-        Formato:
-            # MAPA_DOCS
-            id|caminho
-            ...
-            # TRIE
-            termo|doc_id:freq,doc_id:freq,...
-        """
+
         if caminho_arquivo is None:
             caminho_arquivo = self.arquivo_indice
 
@@ -106,9 +92,7 @@ class Indexador:
 
 
     def carregar_indice(self, caminho_arquivo: str = None):
-        """
-        Carrega um índice salvo em disco e reconstrói a Trie e o mapa de documentos.
-        """
+
         if caminho_arquivo is None:
             caminho_arquivo = self.arquivo_indice
 
