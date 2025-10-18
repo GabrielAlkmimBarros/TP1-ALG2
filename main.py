@@ -2,7 +2,6 @@ from indexador import Indexador
 from searchTree import RecuperacaoInformacao 
 
 
-
 def main():
     caminho_corpus = "bbc-fulltext/bbc"   # ajuste para o seu diretório real
     arquivo_indice = "indice.txt"
@@ -34,5 +33,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-

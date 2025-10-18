@@ -2,9 +2,6 @@
 
 class TrieNode:
     def __init__(self):
-        # self.children = {}   # {string: TrieNode}
-        # self.docs = set()    # conjunto de IDs de documentos
-        # self.is_end = False
         self.children = {}      # {string_da_aresta: TrieNode}
         self.postings = {}      # Estrutura: [(doc_id, frequencia), (doc_id, frequencia), ...]
         self.is_end = False     # Flag para indicar se o caminho até aqui forma um termo completo
@@ -18,9 +15,7 @@ class TrieCompacta:
             self.root = TrieNode()
 
     def insert(self, word: str, doc_id: int):
-        """
-        Insere uma palavra associando-a a um documento.
-        """
+
         node = self.root
         current = word
 
@@ -52,7 +47,6 @@ class TrieCompacta:
                 node.children[current] = new_node
                 return
 
-            # Se já consumimos toda a palavra, marca fim de palavra
             if current == "":
                 node.is_end = True
                 node.postings[doc_id] = node.postings.get(doc_id, 0) + 1
@@ -71,10 +65,10 @@ class TrieCompacta:
                     node = child
                     found = True
                     break
-                elif edge.startswith(current):  # palavra termina no meio da aresta
+                elif edge.startswith(current):  
                     return {}
             if not found:
-                return {}  # não encontrou prefixo compatível
+                return {}  
 
         return set(node.postings.keys()) if node.is_end else set()
     
