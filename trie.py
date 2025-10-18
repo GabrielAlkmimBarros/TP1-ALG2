@@ -5,6 +5,11 @@ class TrieNode:
         self.children = {}   # {string: TrieNode}
         self.docs = set()    # conjunto de IDs de documentos
         self.is_end = False
+        self.children = {}      # {string_da_aresta: TrieNode}
+        self.postings = {}      # Estrutura: [(doc_id, frequencia), (doc_id, frequencia), ...]
+        self.is_end = False     # Flag para indicar se o caminho até aqui forma um termo completo
+
+
 
 
 
@@ -43,21 +48,18 @@ class TrieCompacta:
                 # Caso 3: não há prefixo comum -> adiciona nova aresta
                 new_node = TrieNode()
                 new_node.is_end = True
-                new_node.docs.add(doc_id)
+                new_node.postings[doc_id] = 1
                 node.children[current] = new_node
                 return
 
             # Se já consumimos toda a palavra, marca fim de palavra
             if current == "":
                 node.is_end = True
-                node.docs.add(doc_id)
+                node.postings[doc_id] = node.postings.get(doc_id, 0) + 1
                 return
 
     def search(self, word: str):
-        """
-        Busca uma palavra e retorna o conjunto de documentos associados.
-        Retorna set() se a palavra não estiver no índice.
-        """
+
         node = self.root
         current = word
 
@@ -70,18 +72,14 @@ class TrieCompacta:
                     found = True
                     break
                 elif edge.startswith(current):  # palavra termina no meio da aresta
-                    return set()
+                    return {}
             if not found:
-                return set()  # não encontrou prefixo compatível
+                return {}  # não encontrou prefixo compatível
 
-        # Se chegamos ao fim da palavra, verifica se é final de termo
-        return node.docs if node.is_end else set()
+        return set(node.postings.keys()) if node.is_end else set()
     
     def _common_prefix_length(self, a: str, b: str) -> int:
-        """
-        Retorna o comprimento do maior prefixo comum entre a e b.
-        Exemplo: a="carta", b="carro" -> retorna 3
-        """
+
         min_len = min(len(a), len(b))
         for i in range(min_len):
             if a[i] != b[i]:
@@ -91,31 +89,22 @@ class TrieCompacta:
 
 
     def _split_edge(self, node, edge, prefix_len):
-        """
-        Divide uma aresta (edge) em duas, quando um novo termo
-        compartilha apenas parte dela.
 
-        """
         prefix = edge[:prefix_len]
         suffix = edge[prefix_len:]
 
-        # Nó antigo que era o filho do edge original
+
         old_child = node.children.pop(edge)
 
-        # Novo nó que representará o prefixo comum
         new_child = TrieNode()
 
-        # O sufixo vira a nova aresta do novo nó
         new_child.children[suffix] = old_child
 
-        # Substitui na árvore
         node.children[prefix] = new_child
 
 
     def print_trie(self, node=None, prefix=""):
-        """
-        Função auxiliar para depuração  
-        """
+        # auxiliar 
         if node is None:
             node = self.root
 
@@ -124,6 +113,12 @@ class TrieCompacta:
             print(f"{word}  (end={child.is_end}, docs={child.docs})")
             self.print_trie(child, word)
 
+        
+    def get_all_words_with_postings(self) -> dict:
+
+        words = {}
+        self._get_all_words_recursive(self.root, "", words)
+        return words
 
 
 
