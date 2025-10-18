@@ -1,3 +1,4 @@
+import os  # <-- PASSO 1: Adicione esta importação
 from indexador import Indexador
 from searchTree import RecuperacaoInformacao 
 
@@ -6,8 +7,8 @@ if __name__ == "__main__":
     
 
     indexador = Indexador(corpus_path)
-    print("\nConstruindo índice...")
-    indexador.construir_indice()
+    #print("\nConstruindo índice...") <-- Não precisamos mais disso
+    indexador.construir_indice() # <-- Isso agora vai carregar ou construir
 
     # Cria o módulo de busca 
     busca = RecuperacaoInformacao(indexador)
@@ -26,7 +27,10 @@ if __name__ == "__main__":
         else:
             # Converte IDs em caminhos de arquivo
             caminhos = [indexador.mapa_docs[i] for i in docs]
-            caminhos = sorted(caminhos, key=lambda x: int(x.split('/')[-1].split('.')[0]))
+            
+            # --- PASSO 2: A LINHA CORRIGIDA ---
+            # Usa os.path.basename(x) para pegar '135.txt' de forma segura
+            caminhos = sorted(caminhos, key=lambda x: int(os.path.basename(x).split('.')[0]))
 
             print(f"\nConsulta: {consulta}")
             print(f"Documentos encontrados ({len(caminhos)}):")

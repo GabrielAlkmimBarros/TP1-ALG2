@@ -119,6 +119,16 @@ class TrieCompacta:
         words = {}
         self._get_all_words_recursive(self.root, "", words)
         return words
+    
+    def _get_all_words_recursive(self, node: TrieNode, prefix: str, words_dict: dict):
+        # Se este nó marca o fim de uma palavra, armazena
+        # a palavra (prefixo) e suas postings.
+        if node.is_end:
+            words_dict[prefix] = node.postings
+
+        # Continua a recursão para todos os filhos
+        for edge, child_node in node.children.items():
+            self._get_all_words_recursive(child_node, prefix + edge, words_dict)
 
 
 
