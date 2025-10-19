@@ -1,67 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
+    
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabalho Prático</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        
+        /* Centraliza tudo na página */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column; 
+        
+        /* Fundo branco, como o Google */
+        background-color: #fff; 
+    }
+
+    .titulo {
+    /* 1. Fonte e Peso */
+    font-size: 1.5em; /* Um tamanho bom para títulos em páginas web */
+    font-weight: 500; /* Medium ou Semi-Bold (500 ou 600) dá um toque elegante sem ser muito pesado */
+    text-transform: uppercase; /* Deixa em caixa alta, como está na imagem */
+    letter-spacing: 2px; /* Aumenta o espaçamento entre as letras para um visual mais sofisticado */
+    
+    /* 2. Cor */
+    color: #0973c5; /* Um cinza escuro, mais suave que o preto puro */
+    
+    /* 3. Espaçamento */
+    margin-bottom: 30px; /* Espaço entre o título e a barra de busca */
+    }
+
+    /* O título do seu buscador, estilizado como o logo */
+    .titulo-buscador {
+        font-size: 60px; /* Tamanho grande */
+        font-weight: bold;
+        color: #4285F4; /* Um azul similar ao do Google */
+        margin-bottom: 25px;
+        /* Você pode brincar com as cores das letras aqui se quiser */
+    }
+
+    /* Removemos a caixa azul e deixamos o container transparente */
+    .container_busca{
+        text-align: center;
+        width: 100%;
+        max-width: 580px; /* Largura similar à da barra do Google */
+        padding: 20px;
+        box-sizing: border-box; /* Garante que o padding não aumente a largura */
+    }
+
+    /* Estilo da barra de busca */
+    .input_busca {
+        width: 100%; /* Ocupa toda a largura do container */
+        padding: 12px 20px; /* Deixa a barra mais alta */
+        margin-bottom: 20px; /* Espaço antes do botão */
+        font-size: 16px;
+        
+        /* Bordas arredondadas e cor sutil */
+        border: 1px solid #dfe1e5;
+        border-radius: 24px; /* Chave para o visual do Google */
+        
+        box-sizing: border-box; /* Importante para o padding funcionar com width 100% */
+    }
+    
+    /* Efeito de sombra ao focar ou passar o mouse, como no Google */
+    .input_busca:hover,
+    .input_busca:focus {
+        border-color: rgba(223, 225, 229, 0);
+        box-shadow: 0 1px 6px rgba(32, 33, 36, .28);
+        outline: none; /* Remove a borda azul padrão do navegador */
+    }
+
+
+    /* Estilo do botão */
+    button {
+        background-color: #f8f9fa; /* Cinza claro do Google */
+        border: 1px solid #f8f9fa;
+        border-radius: 4px;
+        color: #3c4043;
+        font-size: 14px;
+        padding: 10px 16px;
+        cursor: pointer;
+        margin: 0 5px; /* Espaço caso adicione outro botão */
+    }
+
+    /* Efeito do botão */
+    button:hover {
+        border: 1px solid #dadce0;
+        box-shadow: 0 1px 1px rgba(0,0,0,.1);
+        color: #202124;
+    }
+
+
+    </style>
+</head>
+    
+
+<body>
+    <div class="titulo">
+        TRABALHO PRATICO 1
+    </div>
+
+    <div class="container_busca">
+
+
+        <form action="/buscar" method="post">
+            <input type="text" name="query" class="input_busca" placeholder="Digite sua busca...">
+            <button type="submit">Buscar</button>
+        </form>
+        
+    </div>
+</body>
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>meu site</title>
 </head>
 
-<style>
-    body, html {
-        height: 100%;
-        margin: 0;
-        font-family: Arial, Helvetica, sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #f0f0f0;
-        flex-direction: column; 
-    }
 
-    .container_busca{
-        text-align: center;
-        background-color: lightblue;
-        border-color: whitesmoke;
-        border-radius: 10px;
-        padding: 20px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        width: 300px;
-    }
-
-    .input_busca {
-        width: 80%;
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-
-    button {
-        padding: 10px 20px;
-        background-color: whitesmoke;
-        color: black;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    button:hover {
-        background-color: blue;
-        color: white;
-        border: 1px solid black;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
-
-</style>
-
-<body>
-    <div class="container_busca">
-        <form action="/buscar" method="post">
-            <input type="text" name="query" class="input_busca" placeholder="Digite sua busca...">
-            <button type="submit">Buscar</button>
-        </form>
-
-    </div>
-</body>
 </html>
