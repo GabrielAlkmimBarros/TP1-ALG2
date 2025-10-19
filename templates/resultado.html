@@ -28,7 +28,7 @@
         {% for resultado in resultados %}
             <div class="result-item">
                 <a href="{{ resultado.link }}" class="result-title">{{ resultado.titulo }}</a>
-                <p class="result-snippet">{{ resultado.snippet }}</p>
+                <p class="result-snippet">{{ resultado.snippet | safe }}</p>
             </div>
         {% endfor %}
     </div>
