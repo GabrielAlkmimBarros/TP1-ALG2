@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
     
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,125 +8,128 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=BBH+Sans+Bartle&display=swap" rel="stylesheet">
     
     <style>
     body, html {
         height: 100%;
         margin: 0;
         font-family: Arial, Helvetica, sans-serif;
-        
-        /* Centraliza tudo na página */
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column; 
-        
-        /* Fundo branco, como o Google */
         background-color: #fff; 
     }
 
+    /* 2. Seu TÍTULO original com a fonte que você escolheu */
     .titulo {
-    /* 1. Fonte e Peso */
-    font-size: 1.5em; /* Um tamanho bom para títulos em páginas web */
-    font-weight: 500; /* Medium ou Semi-Bold (500 ou 600) dá um toque elegante sem ser muito pesado */
-    text-transform: uppercase; /* Deixa em caixa alta, como está na imagem */
-    letter-spacing: 2px; /* Aumenta o espaçamento entre as letras para um visual mais sofisticado */
-    
-    /* 2. Cor */
-    color: #0973c5; /* Um cinza escuro, mais suave que o preto puro */
-    
-    /* 3. Espaçamento */
-    margin-bottom: 30px; /* Espaço entre o título e a barra de busca */
+        font-family: 'BBH Sans Bartle', sans-serif;
+        font-weight: 400; 
+        font-style: normal; 
+        font-size: 50px;
+        text-transform: uppercase; 
+        letter-spacing: 2px; 
+        color: #0973c5; 
+        margin-bottom: 30px; 
     }
 
-    /* O título do seu buscador, estilizado como o logo */
-    .titulo-buscador {
-        font-size: 60px; /* Tamanho grande */
-        font-weight: bold;
-        color: #4285F4; /* Um azul similar ao do Google */
-        margin-bottom: 25px;
-        /* Você pode brincar com as cores das letras aqui se quiser */
-    }
-
-    /* Removemos a caixa azul e deixamos o container transparente */
+    /* Container principal da busca (largura da imagem) */
     .container_busca{
         text-align: center;
         width: 100%;
-        max-width: 580px; /* Largura similar à da barra do Google */
+        max-width: 580px; 
         padding: 20px;
-        box-sizing: border-box; /* Garante que o padding não aumente a largura */
+        box-sizing: border-box; 
     }
 
-    /* Estilo da barra de busca */
-    .input_busca {
-        width: 100%; /* Ocupa toda a largura do container */
-        padding: 12px 20px; /* Deixa a barra mais alta */
-        margin-bottom: 20px; /* Espaço antes do botão */
-        font-size: 16px;
-        
-        /* Bordas arredondadas e cor sutil */
+    /* 3. Texto de ajuda (da imagem de inspiração) */
+    .search-hint {
+        font-size: 13px;
+        color: #5f6368; 
+        margin-bottom: 12px;
+        /* Alinhado à esquerda para bater com a imagem */
+        text-align: center;
+        padding-left: 10px; /* Pequeno ajuste de alinhamento */
+    }
+
+    /* 4. WRAPPER da barra (para incluir o ícone) */
+    .search-bar-wrapper {
+        display: flex; 
+        align-items: center;
         border: 1px solid #dfe1e5;
-        border-radius: 24px; /* Chave para o visual do Google */
-        
-        box-sizing: border-box; /* Importante para o padding funcionar com width 100% */
+        border-radius: 24px; 
+        padding: 0 16px; 
+        margin-bottom: 25px; 
     }
     
-    /* Efeito de sombra ao focar ou passar o mouse, como no Google */
-    .input_busca:hover,
-    .input_busca:focus {
+    .search-bar-wrapper:hover,
+    .search-bar-wrapper:focus-within { 
         border-color: rgba(223, 225, 229, 0);
         box-shadow: 0 1px 6px rgba(32, 33, 36, .28);
-        outline: none; /* Remove a borda azul padrão do navegador */
+    }
+    
+    /* Estilo do ícone de busca (SVG) */
+    .search-icon {
+        width: 20px;
+        height: 20px;
+        fill: #9aa0a6; 
+        margin-right: 12px; 
     }
 
+    /* 5. INPUT de busca (sem borda) */
+    .input_busca {
+        width: 100%; 
+        text-align: center;
+        padding: 12px 0; 
+        font-size: 16px;
+        border: none;
+        outline: none;
+        background-color: transparent;
+    }
 
-    /* Estilo do botão */
+    /* Estilo do botão (revertido para o estilo Google) */
     button {
-        background-color: #f8f9fa; /* Cinza claro do Google */
+        background-color: #f8f9fa; 
         border: 1px solid #f8f9fa;
         border-radius: 4px;
         color: #3c4043;
         font-size: 14px;
         padding: 10px 16px;
         cursor: pointer;
-        margin: 0 5px; /* Espaço caso adicione outro botão */
+        margin: 0 5px; 
     }
 
-    /* Efeito do botão */
     button:hover {
         border: 1px solid #dadce0;
         box-shadow: 0 1px 1px rgba(0,0,0,.1);
         color: #202124;
+        background-color: #57a9e7;
+        color: #fff;
     }
-
-
     </style>
 </head>
     
-
 <body>
+    
     <div class="titulo">
         TRABALHO PRATICO 1
     </div>
 
     <div class="container_busca">
 
+        <p class="search-hint">Use os operadores AND, OR e parêntesis () para refinar sua busca.</p>
 
         <form action="/buscar" method="post">
-            <input type="text" name="query" class="input_busca" placeholder="Digite sua busca...">
-            <button type="submit">Buscar</button>
+            
+            <div class="search-bar-wrapper">
+                
+                <input type="text" name="query" class="input_busca" placeholder="Ex: (sport AND football) OR technology">
+            </div>
+
+            <button type="submit" class="botaobuscar">Buscar</button>
         </form>
-        
     </div>
 </body>
-
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>meu site</title>
-</head>
-
 
 </html>

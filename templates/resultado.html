@@ -1,18 +1,80 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <title>Resultados para {{ query }}</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        .search-header { border-bottom: 1px solid #ebebeb; padding-bottom: 15px; }
-        .search-bar { width: 400px; padding: 10px; border-radius: 20px; border: 1px solid #dfe1e5; }
-        .search-button { padding: 10px 15px; }
-        .result-item { margin-top: 20px; }
-        .result-title { color: #1a0dab; font-size: 20px; text-decoration: none; }
-        .result-snippet { color: #4d5156; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px auto;
+            max-width: 800px;
+            background-color: #f8f9fa;
+        }
+
+        .search-header {
+            border-bottom: 1px solid #ebebeb;
+            padding-bottom: 15px;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .search-header form {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-bar {
+            font-size: 15px;
+            flex-grow: 1;
+            padding: 10px 15px;
+            border-radius: 20px;
+            border: 1px solid #dfe1e5;
+            margin-right: 10px;
+        }
+
+        .search-button { 
+            padding: 10px 15px;
+            border: 1px solid #f8f9fa;
+            border-radius: 4px;
+            background-color: #f8f9fa;
+            cursor: pointer;
+        }
+        .search-button:hover {
+            border: 1px solid #dadce0;
+        }
+
+        .results-info {
+            color: #5f6368;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+
+        .result-item {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ebebeb;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 1px 3px rgba(60,64,67,.15), 0 4px 8px rgba(60,64,67,.15);
+        }
+
+        .result-title {
+            color: #1a0dab;
+            font-size: 20px;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .result-snippet {
+            color: #4d5156;
+            margin-top: 5px;
+            line-height: 1.5;
+        }
     </style>
 </head>
+
 <body>
 
     <div class="search-header">
@@ -22,18 +84,22 @@
         </form>
     </div>
 
-    <p>Exibindo resultados para: <strong>{{ query }}</strong></p>
-    <p><strong>{{ total_encontrado }}</strong> resultado(s) encontrado(s).</p>
+    <div class="results-info">
+
+        <p>Exibindo resultados para: <strong>{{ query }}</strong></p>
+        <p><strong>{{ total_encontrado }}</strong> resultado(s) encontrado(s).</p>
+    </div>
 
 
     <div class="results-container">
         {% for resultado in resultados %}
-            <div class="result-item">
-                <a href="{{ resultado.link }}" class="result-title">{{ resultado.titulo }}</a>
-                <p class="result-snippet">{{ resultado.snippet | safe }}</p>
-            </div>
+        <div class="result-item">
+            <a href="{{ resultado.link }}" class="result-title">{{ resultado.titulo }}</a>
+            <p class="result-snippet">{{ resultado.snippet | safe }}</p>
+        </div>
         {% endfor %}
     </div>
 
 </body>
+
 </html>
