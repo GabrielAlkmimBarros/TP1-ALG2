@@ -72,6 +72,32 @@
             margin-top: 5px;
             line-height: 1.5;
         }
+        
+        .pagination {
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #ebebeb;
+            text-align: center;
+            font-size: 16px;
+        }
+        .page-link {
+            text-decoration: none;
+            color: #1a0dab;
+            padding: 8px 16px;
+            border: 1px solid #dfe1e5;
+            border-radius: 4px;
+            margin: 0 5px;
+        }
+        .page-link:hover {
+            background-color: #f0f0f0;
+            border-color: #dadce0;
+        }
+        .page-current {
+            margin: 0 10px;
+            color: #5f6368;
+            font-weight: bold;
+        }
+
     </style>
 </head>
 
@@ -96,9 +122,23 @@
         <div class="result-item">
             <a href="{{ resultado.link }}" class="result-title">{{ resultado.titulo }}</a>
             <p class="result-snippet">{{ resultado.snippet | safe }}</p>
-            <p style="color:#5f6368; font-size:13px;">Relevância: {{ resultado.score }}</p>
         </div>
         {% endfor %}
+    </div>
+
+    <div class="pagination">
+        
+        {% if page > 1 %}
+            <a href="/buscar?query={{ query }}&page={{ page - 1 }}" class="page-link">Anterior</a>
+        {% endif %}
+
+        {% if total_paginas > 0 %}
+        <span class="page-current">Página {{ page }} de {{ total_paginas }}</span>
+        {% endif %}
+
+        {% if page < total_paginas %}
+            <a href="/buscar?query={{ query }}&page={{ page + 1 }}" class="page-link">Próxima</a>
+        {% endif %}
     </div>
 
 </body>
