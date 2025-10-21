@@ -72,6 +72,8 @@ class RecuperacaoInformacao:
 
             else:
                 # termo
+                if valores and (not operadores or operadores[-1] != "("):
+                    operadores.append("OR")
                 valores.append(NoConsulta(token.lower()))
 
         while operadores:
