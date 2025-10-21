@@ -96,6 +96,7 @@
         <div class="result-item">
             <a href="{{ resultado.link }}" class="result-title">{{ resultado.titulo }}</a>
             <p class="result-snippet">{{ resultado.snippet | safe }}</p>
+            <p style="color:#5f6368; font-size:13px;">Relevância: {{ resultado.score }}</p>
         </div>
         {% endfor %}
     </div>

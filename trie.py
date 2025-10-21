@@ -66,9 +66,9 @@ class TrieCompacta:
                     found = True
                     break
                 elif edge.startswith(current):  
-                    return {}
+                    return set()
             if not found:
-                return {}  
+                return set()  
 
         return set(node.postings.keys()) if node.is_end else set()
     

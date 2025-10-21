@@ -73,12 +73,12 @@ def buscar():
     termos_consulta = [t.lower() for t in re.findall(r'\(|\)|AND|OR|[A-Za-zÀ-ÿ0-9_-]+', termo_buscado) if t.lower() not in ("and", "or", "(", ")")]
     termos_consulta = list(set(termos_consulta)) # Remove duplicatas
 
-    resultados_ids = busca.processar_consulta(termo_buscado)
+    resultados_ranqueados = busca.processar_consulta(termo_buscado)
 
     lista_resultados = []
 
-    ids_ordenados = sorted(resultados_ids)
-    for doc_id in ids_ordenados:
+    ids_ordenados = sorted(resultados_ranqueados)
+    for doc_id, score in resultados_ranqueados:
         # Pega o caminho do arquivo (ex: "bbc-fulltext/bbc/tech/001.txt")
         caminho_arquivo = indexador.mapa_docs.get(doc_id)
         if not caminho_arquivo:
@@ -100,8 +100,10 @@ def buscar():
         resultado_formatado = {
             'titulo': titulo_bonito,
             'link': '#', # Link placeholder
-            'snippet': snippet_final
+            'snippet': snippet_final,
+            'score': f"{score:.3f}"
         }
+        
         lista_resultados.append(resultado_formatado)
 
     # renderiza a página de resultados com os dados reais
