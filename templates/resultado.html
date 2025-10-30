@@ -4,20 +4,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Resultados para {{ query }}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Nabla&display=swap" rel="stylesheet">
+
     <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            /* Fundo gradiente (do index.html) */
+            background: linear-gradient(to bottom, black, rgba(238, 107, 0, 0.719)); 
+            background-attachment: fixed; /* Fixa o gradiente durante a rolagem */
             margin: 20px auto;
             max-width: 800px;
-            background-color: #f8f9fa;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Título (do index.html, com fonte menor) */
+        .titulo {
+            font-family: 'Nabla', system-ui, sans-serif;
+            font-optical-sizing: auto;
+            font-variation-settings: "EDPT" 100, "EHLT" 12;
+            font-weight: 400; 
+            font-style: normal; 
+            font-size: 70px; /* Um pouco menor para a página de resultados */
+            text-transform: uppercase; 
+            letter-spacing: 1.5px; 
+            color: #0973c5; 
+            margin-bottom: 20px; 
+            text-align: center;
+            line-height: 1.1; 
         }
 
         .search-header {
-            border-bottom: 1px solid #ebebeb;
+            /* Remove o fundo branco e a borda */
+            border-bottom: 1px solid #5f6368; /* Borda cinza para separar */
             padding-bottom: 15px;
-            background-color: #fff;
-            padding: 15px;
-            border-radius: 8px;
+            background-color: transparent;
+            padding: 15px 0;
         }
 
         .search-header form {
@@ -25,38 +55,68 @@
             align-items: center;
         }
 
+        /* Barra de busca (estilo do index.html) */
         .search-bar {
-            font-size: 15px;
             flex-grow: 1;
             padding: 10px 15px;
-            border-radius: 20px;
-            border: 1px solid #dfe1e5;
             margin-right: 10px;
+            
+            /* Estilos copiados do .search-bar-wrapper e .input_busca */
+            background-color: #f8f9fa; 
+            border: 1px solid #f8f9fa; 
+            border-radius: 24px; 
+            font-weight: 700;
+            font-size: 16px; /* Um bom tamanho para a barra de resultados */
+            color: #3c4043; 
+            text-align: center;
+            outline: none;
         }
 
+        .search-bar:focus {
+             border-color: rgba(223, 225, 229, 0);
+             box-shadow: 0 1px 6px rgba(32, 33, 36, .28);
+        }
+        .search-bar::placeholder {
+             color: #5f6368; 
+             opacity: 1; 
+        }
+
+
+        /* Botão de busca (estilo do index.html) */
         .search-button { 
-            padding: 10px 15px;
+            background-color: #f8f9fa; 
+            font-style:normal;
+            font-weight: 1000;
             border: 1px solid #f8f9fa;
             border-radius: 4px;
-            background-color: #f8f9fa;
+            color: #3c4043;
+            font-size: 14px;
+            padding: 10px 16px;
             cursor: pointer;
+            margin: 0 5px; 
         }
         .search-button:hover {
             border: 1px solid #dadce0;
+            box-shadow: 0 1px 1px rgba(0,0,0,.1);
+            color: #202124;
+            background-color: #ffae00;
+            color: black;
         }
 
+        /* Informação de resultados (cor alterada para branco) */
         .results-info {
-            color: #5f6368;
+            color: #f1f1f1; /* Alterado de cinza escuro para branco */
             font-size: 14px;
             margin-top: 15px;
         }
 
+        /* Card de resultado (mantido branco) */
         .result-item {
             margin-top: 20px;
-            padding: 10px;
+            padding: 15px 20px;
             border: 1px solid #ebebeb;
             border-radius: 8px;
-            background-color: #fff;
+            background-color: #fff; /* Fundo branco para destacar */
             box-shadow: 0 1px 3px rgba(60,64,67,.15), 0 4px 8px rgba(60,64,67,.15);
         }
 
@@ -73,28 +133,43 @@
             line-height: 1.5;
         }
         
+        /* Paginação */
         .pagination {
             margin-top: 30px;
             padding-top: 15px;
-            border-top: 1px solid #ebebeb;
+            padding-bottom: 15px;
+            /*TAMANHO DA FONTE*/
+            font-size: 16px;
             text-align: center;
             font-size: 16px;
         }
+        
+        /* Links de paginação (estilo do index.html) */
         .page-link {
             text-decoration: none;
-            color: #1a0dab;
-            padding: 8px 16px;
-            border: 1px solid #dfe1e5;
+            background-color: #f8f9fa; 
+            font-weight: 1000;
+            border: 1px solid #f8f9fa;
             border-radius: 4px;
-            margin: 0 5px;
+            color: #3c4043;
+            font-size: 14px;
+            padding: 10px 16px;
+            cursor: pointer;
+            margin: 0 5px; 
+            display: inline-block; /* Garante padding correto */
         }
         .page-link:hover {
-            background-color: #f0f0f0;
-            border-color: #dadce0;
+            border: 1px solid #dadce0;
+            box-shadow: 0 1px 1px rgba(0,0,0,.1);
+            color: #202124;
+            background-color: #ffae00;
+            color: black;
         }
+
+        /* Texto da página atual (cor alterada para branco) */
         .page-current {
             margin: 0 10px;
-            color: #5f6368;
+            color: #f1f1f1; /* Alterado de cinza escuro para branco */
             font-weight: bold;
         }
 
@@ -103,15 +178,18 @@
 
 <body>
 
+    <div class="titulo">
+        SUPER ULTRA MEGA <br> BUSCADOR
+    </div>
+
     <div class="search-header">
         <form action="/buscar" method="POST">
-            <input type="text" name="query" class="search-bar" value="{{ query }}">
+            <input type="text" name="query" class="search-bar" value="{{ query }}" placeholder="Refine sua busca...">
             <button type="submit" class="search-button">Pesquisar</button>
         </form>
     </div>
 
     <div class="results-info">
-
         <p>Exibindo resultados para: <strong>{{ query }}</strong></p>
         <p><strong>{{ total_encontrado }}</strong> resultado(s) encontrado(s).</p>
     </div>
@@ -127,19 +205,54 @@
     </div>
 
     <div class="pagination">
-        
+
+    {# --- LÓGICA DE PAGINAÇÃO COM NÚMEROS --- #}
+    {% if total_paginas > 1 %}
+
+        {# BOTÃO 'ANTERIOR' #}
         {% if page > 1 %}
             <a href="/buscar?query={{ query }}&page={{ page - 1 }}" class="page-link">Anterior</a>
         {% endif %}
 
-        {% if total_paginas > 0 %}
-        <span class="page-current">Página {{ page }} de {{ total_paginas }}</span>
+        {# NÚMEROS DAS PÁGINAS (LÓGICA PRINCIPAL) #}
+        {# Define quantos links mostrar antes e depois da página atual #}
+        {% set num_links_laterais = 2 %} 
+        {% set inicio = page - num_links_laterais if (page - num_links_laterais) > 0 else 1 %}
+        {% set fim = page + num_links_laterais if (page + num_links_laterais) < total_paginas else total_paginas %}
+
+        {# Link para a primeira página e '...' se necessário #}
+        {% if inicio > 1 %}
+            <a href="/buscar?query={{ query }}&page=1" class="page-link">1</a>
+            {% if inicio > 2 %}
+                <span class="page-current">...</span>
+            {% endif %}
         {% endif %}
 
+        {# Gera os links da janela de páginas (ex: 3, 4, 5, 6, 7) #}
+        {% for p in range(inicio, fim + 1) %}
+            {% if p == page %}
+                {# Marca a página atual com um estilo diferente (não é um link) #}
+                <span class="page-link page-active">{{ p }}</span>
+            {% else %}
+                <a href="/buscar?query={{ query }}&page={{ p }}" class="page-link">{{ p }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {# Link para a última página e '...' se necessário #}
+        {% if fim < total_paginas %}
+            {% if fim < total_paginas - 1 %}
+                 <span class="page-current">...</span>
+            {% endif %}
+            <a href="/buscar?query={{ query }}&page={{ total_paginas }}" class="page-link">{{ total_paginas }}</a>
+        {% endif %}
+
+        {# BOTÃO 'PRÓXIMA' #}
         {% if page < total_paginas %}
             <a href="/buscar?query={{ query }}&page={{ page + 1 }}" class="page-link">Próxima</a>
         {% endif %}
-    </div>
+
+    {% endif %}
+</div>
 
 </body>
 
