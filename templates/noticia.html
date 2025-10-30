@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ titulo }}</title>
+    
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            /* Fundo escuro da página de resultados */
+            background: linear-gradient(to bottom, black, rgba(238, 107, 0, 0.719)); 
+            background-attachment: fixed;
+            
+            /* Define a largura máxima para o conteúdo centralizado */
+            margin: 20px auto;
+            max-width: 800px; 
+            padding: 20px;
+            box-sizing: border-box;
+            color: #f1f1f1; /* Cor padrão do texto (claro) */
+        }
+
+        /* 1. Título da Notícia (agora fora da caixa) */
+        .titulo-noticia {
+            color: #f1f1f1; /* Cor branca/clara */
+            font-size: 28px;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        /* 2. "Containerzinho" de Metadados (score e path) */
+        .info-meta {
+            background-color: #fff; /* Fundo branco */
+            color: #333; /* Texto escuro */
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin-bottom: 20px; /* Espaço para não grudar no conteúdo */
+            font-size: 14px;
+            box-shadow: 0 1px 3px rgba(60,64,67,.15);
+        }
+        .info-meta p {
+            margin: 5px 0;
+            color: #555;
+            word-wrap: break-word; 
+        }
+        .info-meta p strong {
+            color: #222;
+        }
+
+        /* 3. Container do Conteúdo (a caixa branca principal) */
+        .container-conteudo {
+            background-color: #fff; /* Fundo branco */
+            color: #333; /* Texto escuro */
+            padding: 25px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(60,64,67,.15);
+        }
+
+        /* Corpo da notícia (preserva quebras de linha) */
+        .corpo-noticia {
+            font-size: 16px;
+            line-height: 1.6;
+            white-space: pre-wrap; /* Essencial para formatar o .txt */
+        }
+
+        /* Link de voltar */
+        .link-voltar {
+            display: inline-block;
+            margin-top: 20px;
+            color: #f1f1f1;
+            font-size: 16px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .link-voltar:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1 class="titulo-noticia">{{ titulo }}</h1>
+
+    <div class="info-meta">
+        <p><strong>Score (Relevância):</strong> {{ "%.4f"|format(score) }}</p>
+        <p><strong>Arquivo de Origem:</strong> {{ path }}</p>
+    </div>
+
+    <div class="container-conteudo">
+        <div class="corpo-noticia">
+            {{ corpo }}
+        </div>
+    </div>
+
+    <a href="javascript:history.back()" class="link-voltar">&larr; Voltar para os resultados</a>
+
+</body>
+</html>

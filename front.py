@@ -128,7 +128,7 @@ def buscar():
         # Cria o dicionário que o seu HTML 'resultado.html' espera
         resultado_formatado = {
             'titulo': titulo_bonito,
-            'link': '#', # Link placeholder
+            'link': f'noticia/{doc_id}?score={score:.3f}', # Link para a página da notícia
             'snippet': snippet_final,
             'score': f"{score:.3f}"
         }
@@ -142,6 +142,34 @@ def buscar():
                            total_encontrado=total_resultados, # O número total de resultados
                            page=page, # A página atual
                            total_paginas=total_paginas # O número total de páginas
+                           )
+
+@app.route("/noticia/<int:doc_id>")
+def mostrar_noticia(doc_id):
+
+    score = request.args.get("score", 0.0, type=float) 
+
+    # 2. Encontrar o caminho do arquivo (como você já faz)
+    caminho_arquivo = indexador.mapa_docs.get(doc_id)
+
+    # 3. Verificar se o arquivo existe
+    if not caminho_arquivo:
+        return "Notícia não encontrada", 404
+
+    # 4. Ler o conteúdo completo do arquivo
+    try:
+        with open(caminho_arquivo, 'r', encoding='utf-8') as f:
+            titulo = f.readline().strip()
+            corpo = f.read().strip()
+    except Exception as e:
+        return f"Erro ao ler o arquivo: {e}", 500
+
+    # 5. Renderizar o template, agora passando os novos dados
+    return render_template('noticia.html', 
+                           titulo=titulo, 
+                           corpo=corpo,
+                           score=score,           # <-- DADO NOVO
+                           path=caminho_arquivo   # <-- DADO NOVO
                            )
 
 
