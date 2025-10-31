@@ -1,5 +1,5 @@
-Autores: Bruno Lopes Melo Fonseca
-         Gabriel Alkmim Barros
+Autores: Bruno Lopes Melo Fonseca,
+         Gabriel Alkmim Barros.
 Para rodar o "Super Ultra Mega Buscador" em sua máquina local, siga os passos abaixo.
 
 ### Passos para Execução
@@ -36,3 +36,4 @@ Para rodar o "Super Ultra Mega Buscador" em sua máquina local, siga os passos a
 ### Para parar o servidor
 
 No terminal onde o `python front.py` está rodando, pressione `Ctrl + C`.
+
