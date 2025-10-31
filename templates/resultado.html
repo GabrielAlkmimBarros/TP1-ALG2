@@ -17,23 +17,21 @@
         }
 
         body {
-            /* Fundo gradiente (do index.html) */
             background: linear-gradient(to bottom, black, rgba(238, 107, 0, 0.719)); 
-            background-attachment: fixed; /* Fixa o gradiente durante a rolagem */
+            background-attachment: fixed; 
             margin: 20px auto;
             max-width: 800px;
             padding: 20px;
             box-sizing: border-box;
         }
 
-        /* Título (do index.html, com fonte menor) */
         .titulo {
             font-family: 'Nabla', system-ui, sans-serif;
             font-optical-sizing: auto;
             font-variation-settings: "EDPT" 100, "EHLT" 12;
             font-weight: 400; 
             font-style: normal; 
-            font-size: 70px; /* Um pouco menor para a página de resultados */
+            font-size: 70px; 
             text-transform: uppercase; 
             letter-spacing: 1.5px; 
             color: #0973c5; 
@@ -43,8 +41,7 @@
         }
 
         .search-header {
-            /* Remove o fundo branco e a borda */
-            border-bottom: 1px solid #5f6368; /* Borda cinza para separar */
+            border-bottom: 1px solid #5f6368; 
             padding-bottom: 15px;
             background-color: transparent;
             padding: 15px 0;
@@ -55,18 +52,16 @@
             align-items: center;
         }
 
-        /* Barra de busca (estilo do index.html) */
         .search-bar {
             flex-grow: 1;
             padding: 10px 15px;
             margin-right: 10px;
             
-            /* Estilos copiados do .search-bar-wrapper e .input_busca */
             background-color: #f8f9fa; 
             border: 1px solid #f8f9fa; 
             border-radius: 24px; 
             font-weight: 700;
-            font-size: 16px; /* Um bom tamanho para a barra de resultados */
+            font-size: 16px; 
             color: #3c4043; 
             text-align: center;
             outline: none;
@@ -82,7 +77,6 @@
         }
 
 
-        /* Botão de busca (estilo do index.html) */
         .search-button { 
             background-color: #f8f9fa; 
             font-style:normal;
@@ -103,20 +97,18 @@
             color: black;
         }
 
-        /* Informação de resultados (cor alterada para branco) */
         .results-info {
-            color: #f1f1f1; /* Alterado de cinza escuro para branco */
+            color: #f1f1f1; 
             font-size: 14px;
             margin-top: 15px;
         }
 
-        /* Card de resultado (mantido branco) */
         .result-item {
             margin-top: 20px;
             padding: 15px 20px;
             border: 1px solid #ebebeb;
             border-radius: 8px;
-            background-color: #fff; /* Fundo branco para destacar */
+            background-color: #fff; 
             box-shadow: 0 1px 3px rgba(60,64,67,.15), 0 4px 8px rgba(60,64,67,.15);
         }
 
@@ -133,18 +125,15 @@
             line-height: 1.5;
         }
         
-        /* Paginação */
         .pagination {
             margin-top: 30px;
             padding-top: 15px;
             padding-bottom: 15px;
-            /*TAMANHO DA FONTE*/
             font-size: 16px;
             text-align: center;
             font-size: 16px;
         }
         
-        /* Links de paginação (estilo do index.html) */
         .page-link {
             text-decoration: none;
             background-color: #f8f9fa; 
@@ -156,7 +145,7 @@
             padding: 10px 16px;
             cursor: pointer;
             margin: 0 5px; 
-            display: inline-block; /* Garante padding correto */
+            display: inline-block; 
         }
         .page-link:hover {
             border: 1px solid #dadce0;
@@ -166,10 +155,9 @@
             color: black;
         }
 
-        /* Texto da página atual (cor alterada para branco) */
         .page-current {
             margin: 0 10px;
-            color: #f1f1f1; /* Alterado de cinza escuro para branco */
+            color: #f1f1f1; 
             font-weight: bold;
         }
 
